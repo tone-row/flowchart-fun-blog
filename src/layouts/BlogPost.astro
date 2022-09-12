@@ -7,7 +7,7 @@ const publishDate = niceDate(frontmatter.publishDate);
 const date = dateString(frontmatter.publishDate);
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} frontmatter={frontmatter}>
   <hgroup>
     <time datetime={date}>{publishDate}</time>
     <h1>{frontmatter.title}</h1>
@@ -31,12 +31,12 @@ const date = dateString(frontmatter.publishDate);
   }
 
   time {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: var(--grey);
   }
 
   .post-description {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 
   .content {

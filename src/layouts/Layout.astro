@@ -1,22 +1,39 @@
 ---
 export interface Props {
 	title: string;
+	frontmatter?: any;
 }
 
-const { title } = Astro.props;
+const { title, frontmatter } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
 const isBlog = (x: string) => x === "" || x.startsWith('posts');
+
+// declare dataLayer on window typescript
+declare global {
+	interface Window {
+		dataLayer: any;
+	}
+}
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-1P1MGNT78Q"></script>
+		<script type="text/partytown">
+			window.dataLayer = window.dataLayer || [];
+			function gtag(...args: any){window.dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-1P1MGNT78Q');
+		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		{frontmatter?.canonical && <link rel="canonical" href={frontmatter.canonical} />}
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		
 	</head>
 	<body>
 		<header>
@@ -70,8 +87,14 @@ const isBlog = (x: string) => x === "" || x.startsWith('posts');
 
 	html {
 		font-family: Inter, system-ui, sans-serif;
-		font-size: 16px;
 		line-height: 1.5;
+		font-size: 14px;
+	}
+
+	@media (min-width: 1044px) {
+		html {
+			font-size: 16px;
+		}
 	}
 
 	body {
@@ -108,13 +131,12 @@ const isBlog = (x: string) => x === "" || x.startsWith('posts');
 
 	h1 {
 		margin: 0;
-		font-size: 48px;
+		font-size: 3rem;
 		font-weight: 700;
 		line-height: 1.2;
 	}
 
 	p.description {
-		font-size: 16px;
 		font-weight: 700;
 		margin: 0;
 		color: var(--blue-500);
@@ -130,10 +152,8 @@ const isBlog = (x: string) => x === "" || x.startsWith('posts');
 	header {
 		padding-block: 20px;
 		display: grid;
-		grid-template-columns: auto minmax(0, 1fr) auto;
-		grid-gap: 40px;
+		gap: 7px;
 		align-items: center;
-		justify-content: start;
 		margin-inline: auto;
 	}
 
@@ -147,6 +167,12 @@ const isBlog = (x: string) => x === "" || x.startsWith('posts');
 	}
 
 	@media (min-width: 1044px) {
+		header {
+			grid-template-columns: auto minmax(0, 1fr) auto;
+			grid-gap: 40px;
+			justify-content: start;
+		}
+		
 		:root {
 			--total: min(max(1000px, 85%), 1400px);
 		}
@@ -158,16 +184,28 @@ const isBlog = (x: string) => x === "" || x.startsWith('posts');
 		main {
 			max-width: calc(var(--total) - 310px);
 		}
+		nav ul {
+			grid-auto-flow: column;
+			justify-content: start;
+		}
+
+		nav a, .to-ff {
+			padding: 8px 20px 9px;
+		}
+
+		.site-brand {
+			justify-self: auto;
+			margin-bottom: 0;
+		}
+
 	}
 
 	nav ul {
 		display: grid;
-		grid-auto-flow: column;
 		grid-gap: 7px;
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		justify-content: start;
 	}
 	
 	nav a, .to-ff {
@@ -176,9 +214,10 @@ const isBlog = (x: string) => x === "" || x.startsWith('posts');
 		border: 1px solid var(--blue-500);
 		color: var(--blue-500);
 		text-decoration: none;
-		padding: 8px 20px 9px;
+		padding: 8px 20px;
 		font-weight: 700;
-		font-size: 14px;
+		font-size: 0.875rem;
+		text-align: center;
 	}
 
 	nav a.active {
@@ -195,6 +234,8 @@ const isBlog = (x: string) => x === "" || x.startsWith('posts');
 		align-self: center;
 		font-size: 0;
 		border-radius: var(--border-radius);
+		justify-self: center;
+		margin-bottom: 1rem;
 	}
 	
 	.site-brand:focus-visible {
