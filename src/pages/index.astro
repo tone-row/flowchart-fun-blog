@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { parse, format } from 'date-fns';
 import { dateString, niceDate } from '../components/niceData';
 
 const posts = (await Astro.glob('./posts/*.mdx')).map((post) => {
@@ -15,7 +14,7 @@ const posts = (await Astro.glob('./posts/*.mdx')).map((post) => {
 }).sort((a, b) => a.numberDate - b.numberDate);
 ---
 
-<Layout title="The Flowchart Fun Blog">
+<Layout title="Flowchart Fun Blog">
 	<main>
 		<header>
 			<h1>Blog</h1>
