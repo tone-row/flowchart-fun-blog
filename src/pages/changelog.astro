@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {marked} from 'marked';
+import {parseISO} from 'date-fns';
+import { getReleases } from '../components/getReleases';
+
+const releases = (await getReleases()).map(release => ({
+  id: release.id,
+  name: release.name,
+  date: release.published_at,
+  niceDate: parseISO(release.published_at ?? "").toLocaleDateString(),
+  body: marked.parse(release.body ?? ""),
+  url: release.html_url
+}));
+
+
+---
+<Layout title="Changelog">
+  <h1>Changelog</h1>
+  <div class="releases">
+    {releases.map(release => 
+      <section>
+        <h2>{release.name}</h2>
+        <time datetime={release.date}>{release.niceDate}</time>
+        <a href={release.url}>View on GitHub</a>
+        <div set:html={release.body} />
+      </section>
+    )}
+  </div>
+</Layout>
