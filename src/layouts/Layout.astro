@@ -41,11 +41,10 @@ declare global {
 				<img src="/flowchart-fun.svg" alt="Flowchart Fun Logo" width="66" height="36.69">
 			</a>
 			<nav>
-				{currentPath}
 				<ul>
 					<li><a href="/" class={isBlog(currentPath) ? "active" : ""}>Blog</a></li>
-					<li><a href="/roadmap" class={currentPath === "roadmap" ? "active" : ""}>Roadmap</a></li>
-					<li><a href="/changelog" class={currentPath === "changelog" ? "active" : ""}>Changelog</a></li>
+					<li><a href="/roadmap" class={currentPath.startsWith("roadmap") ? "active" : ""}>Roadmap</a></li>
+					<li><a href="/changelog" class={currentPath.startsWith("changelog") ? "active" : ""}>Changelog</a></li>
 				</ul>
 			</nav>
 			<a href="https://flowchart.fun" class="to-ff">Go to Flowchart Fun</a>
