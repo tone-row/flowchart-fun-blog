@@ -31,8 +31,29 @@ declare global {
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		{frontmatter?.canonical && <link rel="canonical" href={frontmatter.canonical} />}
+		
+		<!-- HTML Meta Tags -->
+		<meta name="description" content="Follow the development of the text-to-diagram generator app Flowchart Fun. Includes a Blog, Roadmap, and Changelog.">
+	
+		<!-- Facebook Meta Tags -->
+		<meta property="og:url" content="https://blog.flowchart.fun">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="Flowchart Fun Blog">
+		<meta property="og:description" content="Follow the development of the text-to-diagram generator app Flowchart Fun. Includes a Blog, Roadmap, and Changelog.">
+		<meta property="og:image" content="https://blog.flowchart.fun/preview.png">
+	
+		<!-- Twitter Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta property="twitter:domain" content="blog.flowchart.fun">
+		<meta property="twitter:url" content="https://blog.flowchart.fun">
+		<meta name="twitter:title" content="Flowchart Fun Blog">
+		<meta name="twitter:description" content="Follow the development of the text-to-diagram generator app Flowchart Fun. Includes a Blog, Roadmap, and Changelog.">
+		<meta name="twitter:image" content="https://blog.flowchart.fun/preview.png">
+		
+		<!-- astro meta -->
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
