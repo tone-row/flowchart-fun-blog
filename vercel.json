@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://flowchart.fun/blog",
+      "permanent": true
+    },
+    {
+      "source": "/roadmap",
+      "destination": "https://flowchart.fun/blog/roadmap",
+      "permanent": true
+    },
+    {
+      "source": "/changelog",
+      "destination": "https://flowchart.fun/blog/changelog",
+      "permanent": true
+    },
+    {
+      "source": "/posts/:slug",
+      "destination": "https://flowchart.fun/blog/post/:slug",
+      "permanent": true
+    }
+  ]
+}
